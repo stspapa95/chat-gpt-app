@@ -1,8 +1,11 @@
-import type { Metadata } from "next";
 import React from "react";
-import { Poppins } from "@next/font/google";
-import "./globals.css";
 import Link from "next/link";
+import { SessionProvider } from "@/components/SessionProvider";
+import type { Metadata } from "next";
+
+import "./globals.css";
+import { Poppins } from "@next/font/google";
+import UserButton from "@/components/UserButton";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500"],
@@ -20,20 +23,28 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
-      <body className={`${poppins.className}`}>
-        <header className={"p-6 text-white font-bold bg-green-900 text-2xl"}>
-          <div className={"flex flex-grow items-center"}>
-            <Link href={"/"}>GPT Chat</Link>
-            <Link href={"/about"} className={"ml-5 font-light"}>
-              About
-            </Link>
+    <SessionProvider>
+      <html lang="en">
+        <body className={`${poppins.className}`}>
+          <header
+            className={"py-4 px-6 text-white font-bold bg-green-900 text-2xl"}
+          >
+            <div className={"flex flex-grow items-center"}>
+              <Link href={"/"}>GPT Chat</Link>
+              <Link href={"/about"} className={"ml-5 font-light text-lg"}>
+                About
+              </Link>
+              <div className={"ml-auto"}>
+                <UserButton />
+              </div>
+            </div>
+          </header>
+
+          <div className={"flex flex-col md:flex-row"}>
+            <div className={"flex-grow"}>{children}</div>
           </div>
-        </header>
-        <div className={"flex flex-col md:flex-row"}>
-          <div className={"flex-grow"}>{children}</div>
-        </div>
-      </body>
-    </html>
+        </body>
+      </html>
+    </SessionProvider>
   );
 }
