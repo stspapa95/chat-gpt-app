@@ -1,5 +1,5 @@
 import NextAuth, { CallbacksOptions } from "next-auth";
-import GitHubProvider from "next-auth/providers/GitHub";
+import GitHubProvider from "next-auth/providers/github";
 
 const authOptions = {
   callbacks: {
