@@ -17,12 +17,16 @@ const getFirstTwoCapitalLetters = (str?: string | null) => {
 
 function UserButton() {
   const { data: session, status } = useSession();
+
+  const handleSignIn = () => signIn();
+  const handleSignOut = () => signOut();
+
   return (
     <div>
       {status === "authenticated" && (
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Avatar>
+            <Avatar className={"cursor-pointer"}>
               <AvatarImage src={session?.user?.image || ""} />
               <AvatarFallback>
                 {getFirstTwoCapitalLetters(session?.user?.name)}
@@ -31,7 +35,10 @@ function UserButton() {
           </DropdownMenuTrigger>
 
           <DropdownMenuContent>
-            <DropdownMenuItem onClick={() => signOut()}>
+            <DropdownMenuItem
+              onClick={handleSignOut}
+              className={"cursor-pointer"}
+            >
               Sign Out
             </DropdownMenuItem>
           </DropdownMenuContent>
@@ -39,9 +46,7 @@ function UserButton() {
       )}
 
       {status === "unauthenticated" && (
-        <Button onClick={() => signIn()}>
-          Sign in
-        </Button>
+        <Button onClick={handleSignIn}>Sign in</Button>
       )}
     </div>
   );
