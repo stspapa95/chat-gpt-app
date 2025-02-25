@@ -6,8 +6,6 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { Poppins } from "@next/font/google";
 import UserButton from "@/components/UserButton";
-import Chat from "@/components/Chat";
-import { getCompletion } from "@/server-actions/getCompletion";
 
 const poppins = Poppins({
   weight: ["100", "200", "300", "400", "500"],
