@@ -4,7 +4,12 @@ import GitHubProvider from "next-auth/providers/github";
 const authOptions = {
   callbacks: {
     async signIn({ profile }: { profile: { login: string } }) {
-      return profile.login === "stspapa95";
+      const isAllowedToSignIn = profile?.login === "stspapa95";
+      if (!isAllowedToSignIn) {
+        return "/unauthorized";
+      }
+
+      return true;
     },
   } as unknown as CallbacksOptions,
   providers: [
