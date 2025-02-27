@@ -5,10 +5,7 @@ import { getCompletion } from "@/server-actions/getCompletion";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
-interface Message {
-  role: "user" | "assistant";
-  content: string;
-}
+import { Message } from "@/types";
 
 function Chat() {
   const [message, setMessage] = useState("");
